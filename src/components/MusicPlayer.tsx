@@ -1,11 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { Volume2, VolumeX, Play, Pause } from 'lucide-react';
 
 interface MusicPlayerProps {
   audioSrc: string;
 }
 
-const MusicPlayer: React.FC<MusicPlayerProps> = ({ audioSrc }) => {
+export interface MusicPlayerRef {
+  play: () => Promise<void>;
+}
+
+const MusicPlayer = forwardRef<MusicPlayerRef, MusicPlayerProps>(({ audioSrc }, ref) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(0.3);
@@ -72,12 +76,27 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ audioSrc }) => {
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseFloat(e.target.value);
     setVolume(newVolume);
-    
+
     const audio = audioRef.current;
     if (audio) {
       audio.volume = newVolume;
     }
   };
+
+  useImperativeHandle(ref, () => ({
+    play: async () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+
+      try {
+        if (!isPlaying) {
+          await audio.play();
+        }
+      } catch (error) {
+        console.log('Erro ao reproduzir áudio:', error);
+      }
+    }
+  }));
 
   return (
     <div className="fixed bottom-4 right-4 z-50 bg-black/80 backdrop-blur-sm border border-amber-600/30 rounded-lg p-3 shadow-lg">
@@ -113,6 +132,8 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ audioSrc }) => {
       </div>
     </div>
   );
-};
+});
+
+MusicPlayer.displayName = 'MusicPlayer';
 
 export default MusicPlayer;

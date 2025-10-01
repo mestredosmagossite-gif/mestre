@@ -16,12 +16,14 @@ observer.observe(document.body, { childList: true, subtree: true });
 
 import { ChevronLeft, ChevronRight, Instagram, Facebook, Menu, X } from 'lucide-react';
 import { MessageCircle } from 'lucide-react';
-import MusicPlayer from './components/MusicPlayer';
+import MusicPlayer, { MusicPlayerRef } from './components/MusicPlayer';
+import { useRef } from 'react';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const musicPlayerRef = useRef<MusicPlayerRef>(null);
 
   useEffect(() => {
     const observerOptions = {
@@ -187,7 +189,10 @@ function App() {
                 {heroSlides[currentSlide].title}
               </h2>
               <button
-                onClick={() => scrollToSection('grid-section')}
+                onClick={() => {
+                  scrollToSection('grid-section');
+                  musicPlayerRef.current?.play();
+                }}
                 className="bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-black px-8 py-4 rounded-lg text-lg font-bold transition-all duration-500 transform hover:scale-110 hover:shadow-2xl shadow-lg backdrop-blur-sm border border-amber-400/30 animate-pulse z-10 relative"
               >
                 Mestre dos Magos
@@ -436,7 +441,8 @@ function App() {
       </footer>
 
       {/* Music Player */}
-      <MusicPlayer 
+      <MusicPlayer
+        ref={musicPlayerRef}
         audioSrc="https://github.com/mestredosmagossite-gif/musica/raw/refs/heads/main/Dirty%20Prydz%20-%20Paradise%20%5BQL26YnGOI44%5D.mp3"
       />
     </div>
