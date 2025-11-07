@@ -434,7 +434,10 @@ function App() {
           
           <div className="border-t border-gray-800 mt-12 pt-8 text-center">
             <p className="text-gray-400 text-sm md:text-base">
-              © 2025 - MESTRE DOS MAGOS. Todos os direitos reservados. 
+              © 2025 - MESTRE DOS MAGOS. Todos os direitos reservados.
+            </p>
+            <p className="text-gray-400 text-sm md:text-base mt-2">
+              Desenvolvido por <a href="https://lizardai.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300 transition-colors duration-300">LizardAI</a>
             </p>
           </div>
         </div>
