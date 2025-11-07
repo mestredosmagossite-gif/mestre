@@ -437,7 +437,7 @@ function App() {
               © 2025 - MESTRE DOS MAGOS. Todos os direitos reservados.
             </p>
             <p className="text-gray-400 text-sm md:text-base mt-2">
-              Desenvolvido por <a href="https://lizardai.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300 transition-colors duration-300">LizardAI</a>
+              Desenvolvido por <a href="https://lizardai.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300 transition-colors duration-300">LizardAI.</a>
             </p>
           </div>
         </div>
