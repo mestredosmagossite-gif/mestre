@@ -348,10 +348,10 @@ function App() {
               </h2>
               <div className="space-y-4 md:space-y-6 text-gray-400 text-base md:text-lg leading-relaxed animate-slide-up">
                 <p>
-                  Guardião dos segredos ancestrais, o Mestre dos Magos é um sábio que guia aprendizes pelo caminho do poder oculto.
+                  Guardião dos segredos ancestrais, o Mestre dos Magos é um sábio que guia aprendizes pelo caminho do poder oculto através de seu artesanato místico.
                 </p>
                 <p>
-                  Agora, ele compartilha sua sabedoria e artefatos encantados com todos que buscam expandir sua consciência e alcançar o extraordinário.
+                  Agora, ele compartilha sua sabedoria e artefatos encantados com todos que buscam expandir sua consciência e alcançar o extraordinário através do artesanato em Cachoeira BA.
                 </p>
               </div>
             </div>
