@@ -434,7 +434,7 @@ function App() {
           
           <div className="border-t border-gray-800 mt-12 pt-8 text-center">
             <p className="text-gray-400 text-sm md:text-base">
-              © 2024 - MESTRE DOS MAGOS. Todos os direitos reservados.
+              © 2025 - MESTRE DOS MAGOS. Todos os direitos reservados. 
             </p>
           </div>
         </div>
