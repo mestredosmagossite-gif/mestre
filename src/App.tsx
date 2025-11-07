@@ -449,21 +449,4 @@ function App() {
   );
 }
 
-{/* Footer */}
-      <footer className="text-center py-6 text-sm text-muted-foreground">
-        Desenvolvido por{" "}
-        <a 
-          href="" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-primary hover:underline transition-colors"
-        >
-          LizardAI
-        </a>
-      </footer>
-    </div>
-    </>
-  );
-};
-
 export default App;
