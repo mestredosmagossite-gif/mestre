@@ -278,7 +278,7 @@ function App() {
           </h2>
           <p className="text-lg md:text-xl text-gray-400 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed animate-slide-up">
             Nosso propósito é oferecer sabedoria e artefatos encantados que trazem proteção, clareza e poder para quem ousa acessar o extraordinário.
-            Cada produto é criado com a magia ancestral transmitida pelo Mestre dos Magos.
+            Cada produto é criado com a magia ancestral transmitida pelo Mestre dos Magos, representando a essência do artesanato em Cachoeira que conecta tradição e transformação pessoal.
           </p>
           <button
             onClick={scrollToNextSection}
