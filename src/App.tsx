@@ -49,7 +49,7 @@ function App() {
   const heroSlides = [
     {
       image: 'https://i.ibb.co/4g8LDJBp/490448561-3191648090975273-6466619685511415125-n.jpg',
-      title: 'Desperte o poder da magia ancestral'
+      title: ''
     },
     {
       image: 'https://i.ibb.co/9HS82qyM/489927333-3186066831533399-8602430560923160726-n.jpg',
