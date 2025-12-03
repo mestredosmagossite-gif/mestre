@@ -48,15 +48,15 @@ function App() {
 
   const heroSlides = [
     {
-      image: '',
+      image: 'https://i.ibb.co/4g8LDJBp/490448561-3191648090975273-6466619685511415125-n.jpg',
       title: 'Desperte o poder da magia ancestral'
     },
     {
-      image: '',
+      image: 'https://i.ibb.co/9HS82qyM/489927333-3186066831533399-8602430560923160726-n.jpg',
       title: 'Domine os segredos do universo'
     },
     {
-      image: '',
+      image: 'https://i.ibb.co/S48LJXDs/271724099-614490419560015-3535097475649327233-n.jpg',
       title: 'Transforme sua realidade com magia'
     }
   ];
@@ -437,7 +437,7 @@ function App() {
               © 2025 - MESTRE DOS MAGOS. Todos os direitos reservados.
             </p>
             <p className="text-gray-400 text-sm md:text-base mt-2">
-              Desenvolvido por <a href="https://lizardai.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300 transition-colors duration-300">LizardAI.</a>
+              Desenvolvido por <a href="https://lizardai.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:text-amber-300 transition-colors duration-300">LizardAI</a>
             </p>
           </div>
         </div>
