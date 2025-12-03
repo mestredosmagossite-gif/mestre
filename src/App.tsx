@@ -48,15 +48,15 @@ function App() {
 
   const heroSlides = [
     {
-      image: 'https://i.ibb.co/4g8LDJBp/490448561-3191648090975273-6466619685511415125-n.jpg',
+      image: '',
       title: 'Desperte o poder da magia ancestral'
     },
     {
-      image: 'https://i.ibb.co/9HS82qyM/489927333-3186066831533399-8602430560923160726-n.jpg',
+      image: '',
       title: 'Domine os segredos do universo'
     },
     {
-      image: 'https://i.ibb.co/S48LJXDs/271724099-614490419560015-3535097475649327233-n.jpg',
+      image: '',
       title: 'Transforme sua realidade com magia'
     }
   ];
