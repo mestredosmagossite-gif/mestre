@@ -5,7 +5,7 @@ const removeFloating = () => {
   document.querySelectorAll('[style*="position: fixed"][style*="bottom: 1rem"][style*="right: 1rem"][style*="z-index: 2147483647"]').forEach(el => el.remove());
 };
 
-// executa já no load
+// executa já no load 
 removeFloating();
 
 // observa mudanças no DOM
@@ -49,7 +49,7 @@ function App() {
   const heroSlides = [
     {
       image: 'https://i.ibb.co/4g8LDJBp/490448561-3191648090975273-6466619685511415125-n.jpg',
-      title: ''
+      title: 'Desperte o poder da magia ancestral'
     },
     {
       image: 'https://i.ibb.co/9HS82qyM/489927333-3186066831533399-8602430560923160726-n.jpg',
