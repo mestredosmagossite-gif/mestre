@@ -221,12 +221,12 @@ function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
-                image: 'https://i.ibb.co/PGyh2Nqj/491941389-3191648010975281-7697153996359758336-n.jpg',
+                image: '',
                 title: 'ARTEFATOS MÁGICOS',
                 subtitle: 'Instrumentos únicos para canalizar energia.'
               },
               {
-                image: 'https://i.ibb.co/fz2fjmBK/490448784-3191648200975262-2180016959362343194-n.jpg',
+                image: '',
                 title: 'POÇÕES & ELIXIRES',
                 subtitle: 'Força, clareza e vitalidade em frascos mágicos.'
               },
