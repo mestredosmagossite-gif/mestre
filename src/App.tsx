@@ -215,18 +215,18 @@ function App() {
         </div>
       </section>
 
-      {/* 4 Blocos em Grade */}
+      {/* IMAGENS DOS PRODUTOS 01 */}
       <section id="grid-section" className="py-20 bg-neutral-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
-                image: '',
+                image: 'https://i.ibb.co/PGyh2Nqj/491941389-3191648010975281-7697153996359758336-n.jpg',
                 title: 'ARTEFATOS MÁGICOS',
                 subtitle: 'Instrumentos únicos para canalizar energia.'
               },
               {
-                image: '',
+                image: 'https://i.ibb.co/fz2fjmBK/490448784-3191648200975262-2180016959362343194-n.jpg',
                 title: 'POÇÕES & ELIXIRES',
                 subtitle: 'Força, clareza e vitalidade em frascos mágicos.'
               },
@@ -289,7 +289,7 @@ function App() {
         </div>
       </section>
 
-      {/* Produtos em Destaque */}
+      {/* PRODUTOS EM DESTAQUE */}
       <section id="produtos-destaque" className="py-20 bg-neutral-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
