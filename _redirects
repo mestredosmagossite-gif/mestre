@@ -1,0 +1,6 @@
+# Netlify SPA Redirects
+/admin/*    /index.html   200
+/*          /index.html   200
+
+# Para o Supabase Auth
+/.well-known/* 200
