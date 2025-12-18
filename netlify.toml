@@ -1,13 +1,13 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
+command = "npx vite build"
+publish = "dist"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = true
+from = "/*"
+to = "/index.html"
+status = 200
+force = true
 
 [dev]
-  port = 5173
-  command = "npm run dev"
+port = 5173
+command = "npm run dev"
