@@ -15,8 +15,9 @@ export async function getProductImages(): Promise<SiteImage[]> {
   const { data, error } = await supabase
     .from('site_images')
     .select('*')
-    .eq('section_name', 'produtos')
+    .in('section_name', ['grid_section', 'produtos_destaque'])
     .eq('is_active', true)
+    .order('section_name')
     .order('display_order');
 
   if (error) throw error;
@@ -47,9 +48,9 @@ export async function updateProductImage(
 
   const { data: oldImage } = await supabase
     .from('site_images')
-    .select('image_url')
+    .select('image_url, section_name')
     .eq('id', imageId)
-    .single();
+    .maybeSingle();
 
   const { error: updateError } = await supabase
     .from('site_images')
@@ -65,7 +66,7 @@ export async function updateProductImage(
     .from('image_change_log')
     .insert({
       admin_email: adminEmail,
-      section_name: 'produtos',
+      section_name: oldImage?.section_name || 'unknown',
       old_image_url: oldImage?.image_url,
       new_image_url: publicUrl,
       changed_at: new Date().toISOString()

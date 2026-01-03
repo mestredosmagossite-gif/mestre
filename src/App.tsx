@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { supabase } from './lib/supabase';
 
 const removeFloating = () => { 
   document.querySelectorAll('[style*="position: fixed"][style*="bottom: 1rem"][style*="right: 1rem"][style*="z-index: 2147483647"]').forEach(el => el.remove());
@@ -19,10 +20,19 @@ import { MessageCircle } from 'lucide-react';
 import MusicPlayer, { MusicPlayerRef } from './components/MusicPlayer';
 import { useRef } from 'react';
 
+interface SiteImage {
+  id: string;
+  image_url: string;
+  image_title: string;
+  display_order: number;
+}
+
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [gridImages, setGridImages] = useState<SiteImage[]>([]);
+  const [destaqueImages, setDestaqueImages] = useState<SiteImage[]>([]);
   const musicPlayerRef = useRef<MusicPlayerRef>(null);
 
   useEffect(() => {
@@ -44,6 +54,34 @@ function App() {
     animatedElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    async function loadSiteImages() {
+      try {
+        const [gridRes, destaqueRes] = await Promise.all([
+          supabase
+            .from('site_images')
+            .select('*')
+            .eq('section_name', 'grid_section')
+            .eq('is_active', true)
+            .order('display_order'),
+          supabase
+            .from('site_images')
+            .select('*')
+            .eq('section_name', 'produtos_destaque')
+            .eq('is_active', true)
+            .order('display_order')
+        ]);
+
+        if (gridRes.data) setGridImages(gridRes.data);
+        if (destaqueRes.data) setDestaqueImages(destaqueRes.data);
+      } catch (error) {
+        console.error('Erro ao carregar imagens do site:', error);
+      }
+    }
+
+    loadSiteImages();
   }, []);
 
   const heroSlides = [
@@ -219,39 +257,42 @@ function App() {
       <section id="grid-section" className="py-20 bg-neutral-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
+            {(gridImages.length > 0 ? gridImages : [
               {
-                image: 'https://i.ibb.co/PGyh2Nqj/491941389-3191648010975281-7697153996359758336-n.jpg',
-                title: 'ARTEFATOS MÁGICOS',
-                subtitle: 'Instrumentos únicos para canalizar energia.'
+                id: '1',
+                image_url: 'https://i.ibb.co/PGyh2Nqj/491941389-3191648010975281-7697153996359758336-n.jpg',
+                image_title: 'ARTEFATOS MÁGICOS',
+                display_order: 1
               },
               {
-                image: 'https://i.ibb.co/fz2fjmBK/490448784-3191648200975262-2180016959362343194-n.jpg',
-                title: 'POÇÕES & ELIXIRES',
-                subtitle: 'Força, clareza e vitalidade em frascos mágicos.'
+                id: '2',
+                image_url: 'https://i.ibb.co/fz2fjmBK/490448784-3191648200975262-2180016959362343194-n.jpg',
+                image_title: 'POÇÕES & ELIXIRES',
+                display_order: 2
               },
               {
-                image: 'https://i.ibb.co/ymLR7rcs/490747374-3191648207641928-5658032763868867031-n.jpg',
-                title: 'ACADEMIA ARCANA',
-                subtitle: 'Aprenda os segredos guardados por séculos.'
+                id: '3',
+                image_url: 'https://i.ibb.co/ymLR7rcs/490747374-3191648207641928-5658032763868867031-n.jpg',
+                image_title: 'ACADEMIA ARCANA',
+                display_order: 3
               },
               {
-                image: 'https://i.ibb.co/0jJxbCR1/491922232-3191648350975247-6073388817285449038-n.jpg',
-                title: 'SANTUÁRIO MÁGICO',
-                subtitle: 'O espaço sagrado onde a magia acontece.'
+                id: '4',
+                image_url: 'https://i.ibb.co/0jJxbCR1/491922232-3191648350975247-6073388817285449038-n.jpg',
+                image_title: 'SANTUÁRIO MÁGICO',
+                display_order: 4
               }
-            ].map((item, index) => (
+            ]).map((item, index) => (
               <div key={index} className="group transform transition-all duration-500 hover:scale-105 hover:shadow-2xl animate-slide-up">
                 <div className="relative overflow-hidden rounded-lg mb-6">
                   <img
-                    src={item.image}
-                    alt={item.title}
+                    src={item.image_url}
+                    alt={item.image_title}
                     className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105 border border-amber-600/10 rounded-lg"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/50 group-hover:via-black/15 transition-all duration-500"></div>
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 transform transition-transform duration-300 group-hover:translate-y-[-2px]">{item.title}</h3>
-                    <p className="text-gray-300 text-sm md:text-base transform transition-transform duration-300 group-hover:translate-y-[-1px]">{item.subtitle}</p>
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2 transform transition-transform duration-300 group-hover:translate-y-[-2px]">{item.image_title}</h3>
                   </div>
                 </div>
                 <div className="mt-6 text-center">
@@ -293,35 +334,37 @@ function App() {
       <section id="produtos-destaque" className="py-20 bg-neutral-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
+            {(destaqueImages.length > 0 ? destaqueImages : [
               {
-                image: 'https://i.ibb.co/ZzCywHcL/490209267-3191648144308601-8649224761911029015-n.jpg',
-                title: 'ABAJUR DA SABEDORIA',
-                subtitle: 'Concentre energia mística e desbloqueie novos poderes.'
+                id: '1',
+                image_url: 'https://i.ibb.co/ZzCywHcL/490209267-3191648144308601-8649224761911029015-n.jpg',
+                image_title: 'ABAJUR DA SABEDORIA',
+                display_order: 1
               },
               {
-                image: 'https://i.ibb.co/v4hBJrHW/491743194-3191648190975263-7266604297437834366-n.jpg',
-                title: 'POÇÃO DA CLAREZA',
-                subtitle: 'Restaure sua energia vital e amplifique sua visão interior.'
+                id: '2',
+                image_url: 'https://i.ibb.co/v4hBJrHW/491743194-3191648190975263-7266604297437834366-n.jpg',
+                image_title: 'POÇÃO DA CLAREZA',
+                display_order: 2
               },
               {
-                image: 'https://i.ibb.co/LDn4R13R/490736189-3191647980975284-3407902226850599112-n.jpg',
-                title: 'CRISTAIS ENCANTADOS',
-                subtitle: 'Equilibre corpo, mente e espírito com poder arcano.'
+                id: '3',
+                image_url: 'https://i.ibb.co/LDn4R13R/490736189-3191647980975284-3407902226850599112-n.jpg',
+                image_title: 'CRISTAIS ENCANTADOS',
+                display_order: 3
               }
-            ].map((product, index) => (
+            ]).map((product, index) => (
               <div key={index} className="group transform transition-all duration-500 hover:scale-105 hover:shadow-2xl animate-slide-up">
                 <div className="relative overflow-hidden rounded-lg aspect-[3/4] mb-6">
                   <img
-                    src={product.image}
-                    alt={product.title}
+                    src={product.image_url}
+                    alt={product.image_title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 border border-amber-600/10 rounded-lg"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/50 group-hover:via-black/15 transition-all duration-500"></div>
                 </div>
                 <div className="text-center">
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3 transform transition-transform duration-300 group-hover:translate-y-[-1px]">{product.title}</h3>
-                  <p className="text-gray-400 mb-4 md:mb-6 text-sm md:text-base transform transition-transform duration-300 group-hover:translate-y-[-1px]">{product.subtitle}</p>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3 transform transition-transform duration-300 group-hover:translate-y-[-1px]">{product.image_title}</h3>
                   <a
                     href="https://wa.me/5575991289033?text=Ol%C3%A1%20Mestre%2C%20vim%20pelo%20site%2C%20quero%20comprar.%20Como%20fa%C3%A7o%3F"
                     target="_blank"
